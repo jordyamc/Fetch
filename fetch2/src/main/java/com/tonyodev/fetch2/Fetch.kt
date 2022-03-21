@@ -419,8 +419,8 @@ interface Fetch {
      * */
     fun deleteByIdentifiers(
         identifiers: List<Long>,
-        func: Func<List<Download>>?,
-        func2: Func<Error>?
+        func: Func<List<Download>>? = null,
+        func2: Func<Error>? = null
     ):Fetch
 
     /**
