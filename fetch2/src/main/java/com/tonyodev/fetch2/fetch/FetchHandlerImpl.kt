@@ -344,6 +344,14 @@ class FetchHandlerImpl(
         return deleteDownloads(fetchDatabaseManagerWrapper.get(ids).filterNotNull())
     }
 
+    override fun deleteByIdentifier(identifier: List<Long>): List<Download> {
+        return deleteDownloads(
+            fetchDatabaseManagerWrapper
+                .getDownloadsByIdentifier(identifier)
+                .filterNotNull()
+        )
+    }
+
     override fun deleteGroup(id: Int): List<Download> {
         return deleteDownloads(fetchDatabaseManagerWrapper.getByGroup(id))
     }

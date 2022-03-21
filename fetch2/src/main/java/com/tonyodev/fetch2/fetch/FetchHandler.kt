@@ -31,6 +31,7 @@ interface FetchHandler : Closeable {
     fun removeAllWithStatus(status: Status): List<Download>
     fun removeAllInGroupWithStatus(groupId: Int, statuses: List<Status>): List<Download>
     fun delete(ids: List<Int>): List<Download>
+    fun deleteByIdentifier(identifier: List<Long>): List<Download>
     fun deleteGroup(id: Int): List<Download>
     fun deleteAll(): List<Download>
     fun deleteAllWithStatus(status: Status): List<Download>

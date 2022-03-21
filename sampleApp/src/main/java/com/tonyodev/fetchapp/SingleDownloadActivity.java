@@ -5,16 +5,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.tonyodev.fetch2.Download;
 import com.tonyodev.fetch2.Error;
 import com.tonyodev.fetch2.Fetch;
@@ -22,7 +19,6 @@ import com.tonyodev.fetch2.Request;
 import com.tonyodev.fetch2.Status;
 import com.tonyodev.fetch2core.Extras;
 import com.tonyodev.fetch2core.FetchObserver;
-import com.tonyodev.fetch2core.Func;
 import com.tonyodev.fetch2core.MutableExtras;
 import com.tonyodev.fetch2core.Reason;
 
@@ -111,20 +107,12 @@ public class SingleDownloadActivity extends AppCompatActivity implements FetchOb
         ArrayList<String> tags = new ArrayList<>();
         tags.add("bookmark-1");
         request.setTags(tags);
+        request.setDownloadOnEnqueue(false);
         request.setExtras(getExtrasForRequest(request));
 
         fetch.attachFetchObserversForDownload(request.getId(), this)
-                .enqueue(request, new Func<Request>() {
-                    @Override
-                    public void call(@NotNull Request result) {
-                        request = result;
-                    }
-                }, new Func<Error>() {
-                    @Override
-                    public void call(@NotNull Error result) {
-                        Timber.d("SingleDownloadActivity Error: %1$s", result.toString());
-                    }
-                });
+                .enqueue(request, result -> request = result,
+                        result -> Timber.d("SingleDownloadActivity Error: %1$s", result.toString()));
     }
 
     private Extras getExtrasForRequest(Request request) {

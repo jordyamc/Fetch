@@ -409,6 +409,21 @@ interface Fetch {
     fun delete(ids: List<Int>): Fetch
 
     /**
+     * Delete a list of downloads managed by this instance of Fetch.
+     * The downloaded file is deleted.
+     * @param identifiers identifier of downloads to be deleted.
+     * @param func callback that returns the successfully deleted download.
+     * @param func2 Callback that is called when attempting to delete downloads fail. An error is returned.
+     * @throws FetchException if this instance of Fetch has been closed.
+     * @return Instance
+     * */
+    fun deleteByIdentifiers(
+        identifiers: List<Long>,
+        func: Func<List<Download>>?,
+        func2: Func<Error>?
+    ):Fetch
+
+    /**
      * Delete a download managed by this instance of Fetch.
      * The downloaded file is deleted.
      * @param id id of download to be deleted.

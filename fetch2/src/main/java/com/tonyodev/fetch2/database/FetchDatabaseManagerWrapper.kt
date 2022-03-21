@@ -155,6 +155,12 @@ class FetchDatabaseManagerWrapper(private val fetchDatabaseManager: FetchDatabas
         }
     }
 
+    override fun getDownloadsByIdentifier(identifier: List<Long>): List<DownloadInfo?> {
+        return synchronized(lock) {
+            fetchDatabaseManager.getDownloadsByIdentifier(identifier)
+        }
+    }
+
     override fun getPendingDownloadsSorted(prioritySort: PrioritySort): List<DownloadInfo> {
         return synchronized(lock) {
             fetchDatabaseManager.getPendingDownloadsSorted(prioritySort)

@@ -247,6 +247,17 @@ class FetchDatabaseManagerImpl constructor(
         return downloads
     }
 
+    override fun getDownloadsByIdentifier(identifier: List<Long>): List<DownloadInfo?> {
+        throwExceptionIfClosed()
+        val downloadsWithTags = requestDatabase.requestDao()
+            .getDownloadsByIdentifier(identifier)
+        val downloads = downloadsWithTags.map {
+            it.download.apply { tags = it.tags.map { tag -> tag.title } }
+        }
+        sanitize(downloads)
+        return downloads
+    }
+
     override fun getPendingDownloadsSorted(prioritySort: PrioritySort): List<DownloadInfo> {
         throwExceptionIfClosed()
         val downloads = if (prioritySort == PrioritySort.ASC) {

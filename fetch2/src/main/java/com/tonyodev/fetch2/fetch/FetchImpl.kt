@@ -6,7 +6,6 @@ import com.tonyodev.fetch2.*
 import com.tonyodev.fetch2.database.DownloadInfo
 import com.tonyodev.fetch2.database.FetchDatabaseManagerWrapper
 import com.tonyodev.fetch2.exception.FetchException
-import com.tonyodev.fetch2.getErrorFromMessage
 import com.tonyodev.fetch2.fetch.FetchModulesBuilder.Modules
 import com.tonyodev.fetch2.util.ActiveDownloadInfo
 import com.tonyodev.fetch2.util.DEFAULT_ENABLE_LISTENER_AUTOSTART_ON_ATTACHED
@@ -527,6 +526,14 @@ open class FetchImpl constructor(
     override fun delete(ids: List<Int>, func: Func<List<Download>>?, func2: Func<Error>?): Fetch {
         return executeDeleteAction({ fetchHandler.delete(ids) }, func, func2)
     }
+
+    override fun deleteByIdentifiers(
+        identifiers: List<Long>,
+        func: Func<List<Download>>?,
+        func2: Func<Error>?
+    ) = executeDeleteAction(
+        { fetchHandler.deleteByIdentifier(identifiers) }, func, func2
+    )
 
     override fun delete(id: Int, func: Func<Download>?, func2: Func<Error>?): Fetch {
         return delete(listOf(id), Func { downloads ->

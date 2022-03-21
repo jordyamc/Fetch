@@ -149,6 +149,13 @@ interface FetchDatabaseManager<T : DownloadInfo> : Closeable {
     fun getDownloadsByRequestIdentifier(identifier: Long): List<T>
 
     /**
+     * Get a list of downloads by the specified request identifier.
+     * @param identifier the requests identifier
+     * @return list of downloads matching the query.
+     * */
+    fun getDownloadsByIdentifier(identifier: List<Long>): List<T?>
+
+    /**
      * Get a list of downloads by the specified tag.
      * @param tag the tag.
      * @return list of downloads matching the query.
