@@ -705,15 +705,15 @@ interface Fetch {
     fun deleteExtraByKey(
         downloadId: Int,
         key: String,
-        func: Func<Download>?,
-        func2: Func<Error>?
+        func: Func<Download>? = null,
+        func2: Func<Error>? = null
     ): Fetch
 
     fun deleteExtraByKey(
         ids: List<Int>,
         key: String,
-        func: Func<List<Download>>?,
-        func2: Func<Error>?
+        func: Func<List<Download>>? = null,
+        func2: Func<Error>? = null
     ): Fetch
 
     /**

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.tonyodev.fetch2core.Reason;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import timber.log.Timber;
 
@@ -35,6 +37,7 @@ public class SingleDownloadActivity extends AppCompatActivity implements FetchOb
 
     private View mainView;
     private TextView progressTextView;
+    private Button deleteButton;
     private TextView titleTextView;
     private TextView etaTextView;
     private TextView downloadSpeedTextView;
@@ -46,12 +49,19 @@ public class SingleDownloadActivity extends AppCompatActivity implements FetchOb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_download);
         mainView = findViewById(R.id.activity_single_download);
+        deleteButton = findViewById(R.id.delete_key);
         progressTextView = findViewById(R.id.progressTextView);
         titleTextView = findViewById(R.id.titleTextView);
         etaTextView = findViewById(R.id.etaTextView);
         downloadSpeedTextView = findViewById(R.id.downloadSpeedTextView);
         fetch = Fetch.Impl.getDefaultInstance();
         checkStoragePermission();
+
+        deleteButton.setOnClickListener(v -> {
+            List<Integer> ids = new ArrayList<>();
+            ids.add(request.getId());
+            fetch.deleteExtraByKey(ids, "testBoolean", null, null);
+        });
     }
 
     @Override
@@ -107,7 +117,7 @@ public class SingleDownloadActivity extends AppCompatActivity implements FetchOb
         ArrayList<String> tags = new ArrayList<>();
         tags.add("bookmark-1");
         request.setTags(tags);
-        request.setDownloadOnEnqueue(false);
+        request.setDownloadOnEnqueue(true);
         request.setExtras(getExtrasForRequest(request));
 
         fetch.attachFetchObserversForDownload(request.getId(), this)
