@@ -421,7 +421,7 @@ interface Fetch {
         identifiers: List<Long>,
         func: Func<List<Download>>? = null,
         func2: Func<Error>? = null
-    ):Fetch
+    ): Fetch
 
     /**
      * Delete a download managed by this instance of Fetch.
@@ -695,6 +695,18 @@ interface Fetch {
         extras: Extras,
         func: Func<Download>? = null,
         func2: Func<Error>? = null
+    ): Fetch
+
+    /**
+     * This function will delete extra value inside db
+     * @param downloadId Id of existing request/download
+     * @param key id of extras info.
+     */
+    fun deleteExtraByKey(
+        downloadId: Int,
+        key: String,
+        func: Func<Download>?,
+        func2: Func<Error>?
     ): Fetch
 
     /**

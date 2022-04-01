@@ -16,8 +16,9 @@ import java.io.Serializable
  *  @see com.tonyodev.fetch2.Fetch.replaceExtras(id, extras, func, func) method.
  * */
 open class Extras(
-        /** Map that holds the custom data.*/
-        protected val data: Map<String, String>) : Parcelable, Serializable {
+    /** Map that holds the custom data.*/
+    protected val data: HashMap<String, String>
+) : Parcelable, Serializable {
 
     /**
      * Retrieve a string value for passed in matching key.
@@ -93,6 +94,10 @@ open class Extras(
         return MutableExtras(data.toMutableMap())
     }
 
+    fun removeByKey(key: String) {
+        data.remove(key)
+    }
+
     /** Converts the custom value extras stored in this extra class as a JSON string.
      * @return JSON string
      * */
@@ -119,7 +124,7 @@ open class Extras(
      * @return new extras instance
      * */
     open fun copy(): Extras {
-        return Extras(data.toMap())
+        return Extras(data)
     }
 
     /** returns true if the extras object does not contain key value pairs. Otherwise false
@@ -184,7 +189,7 @@ open class Extras(
         }
 
         @JvmStatic
-        val emptyExtras = Extras(emptyMap())
+        val emptyExtras = Extras(hashMapOf())
 
     }
 

@@ -13,6 +13,7 @@ import com.tonyodev.fetch2core.Extras
 import com.tonyodev.fetch2core.calculateProgress
 import com.tonyodev.fetch2core.getFileUri
 import java.util.*
+import kotlin.collections.HashMap
 
 
 @Entity(
@@ -260,7 +261,7 @@ open class DownloadInfo : Download {
             val downloadOnEnqueue = source.readInt() == 1
             val etaInMilliSeconds = source.readLong()
             val downloadedBytesPerSecond = source.readLong()
-            val extras = source.readSerializable() as Map<String, String>
+            val extras = source.readSerializable() as HashMap<String, String>
             val autoRetryMaxAttempts = source.readInt()
             val autoRetryAttempts = source.readInt()
 

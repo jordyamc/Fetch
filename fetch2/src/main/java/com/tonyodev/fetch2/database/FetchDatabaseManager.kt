@@ -191,6 +191,13 @@ interface FetchDatabaseManager<T : DownloadInfo> : Closeable {
     fun updateExtras(id: Int, extras: Extras): T?
 
     /**
+     * Remove the extra value on a download.
+     * @param id the download id.
+     * @param key the key inside extra data.
+     * */
+    fun deleteExtraByKey(id: Int, key: String): T?
+
+    /**
      * Updates the priority on a downloads.
      * @param ids the download id.
      * @param priority the new priority that will replace the existing priority on the download.

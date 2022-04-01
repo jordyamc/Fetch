@@ -516,6 +516,19 @@ class FetchHandlerImpl(
         }
     }
 
+    override fun deleteExtraByKey(downloadId: Int, key: String): Download {
+        var downloadInfo = fetchDatabaseManagerWrapper.get(downloadId)
+        if (downloadInfo != null) {
+            cancelDownloadsIfDownloading(listOf(downloadInfo))
+            downloadInfo = fetchDatabaseManagerWrapper.get(downloadId)
+        }
+        return if (downloadInfo != null) {
+            val download = fetchDatabaseManagerWrapper.deleteExtraByKey(downloadId, key)
+            download ?: throw FetchException(REQUEST_DOES_NOT_EXIST)
+        } else {
+            throw FetchException(REQUEST_DOES_NOT_EXIST)
+        }
+    }
 
     override fun getDownloads(): List<Download> {
         return fetchDatabaseManagerWrapper.get()
