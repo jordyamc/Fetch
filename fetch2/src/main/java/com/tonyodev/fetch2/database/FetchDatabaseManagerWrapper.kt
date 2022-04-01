@@ -185,6 +185,12 @@ class FetchDatabaseManagerWrapper(private val fetchDatabaseManager: FetchDatabas
         }
     }
 
+    override fun deleteExtraByKey(ids: List<Int>, key: String): List<DownloadInfo?> {
+        return synchronized(lock) {
+            fetchDatabaseManager.deleteExtraByKey(ids, key)
+        }
+    }
+
     override fun updatePriority(ids: List<Int>, priority: Priority): List<Download> {
         return synchronized(lock) {
             fetchDatabaseManager.updatePriority(ids, priority)

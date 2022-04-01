@@ -930,7 +930,39 @@ open class FetchImpl constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    logger.e("Failed to replace extras on download with id $downloadId", e)
+                    logger.e("Failed to delete [$key] extras on download with id $downloadId", e)
+                    val error = getErrorFromMessage(e.message)
+                    error.throwable = e
+                    if (func2 != null) {
+                        uiHandler.post {
+                            func2.call(error)
+                        }
+                    }
+                }
+            }
+            this
+        }
+    }
+
+    override fun deleteExtraByKey(
+        ids: List<Int>,
+        key: String,
+        func: Func<List<Download>>?,
+        func2: Func<Error>?
+    ): Fetch {
+        return synchronized(lock) {
+            throwExceptionIfClosed()
+            handlerWrapper.post {
+                try {
+                    val downloads = fetchHandler.deleteExtraByKey(ids, key)
+                    if (func != null) {
+                        uiHandler.post {
+                            logger.d("Deleted [$key] extras on download with ids: $ids")
+                            func.call(downloads)
+                        }
+                    }
+                } catch (e: Exception) {
+                    logger.e("Failed to delete [$key] extras on download with ids: $ids", e)
                     val error = getErrorFromMessage(e.message)
                     error.throwable = e
                     if (func2 != null) {

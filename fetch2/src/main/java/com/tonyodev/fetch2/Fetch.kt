@@ -709,6 +709,13 @@ interface Fetch {
         func2: Func<Error>?
     ): Fetch
 
+    fun deleteExtraByKey(
+        ids: List<Int>,
+        key: String,
+        func: Func<List<Download>>?,
+        func2: Func<Error>?
+    ): Fetch
+
     /**
      * Resets the autoRetryAttempts value for a download back to 0.
      * @param downloadId Id of existing request/download

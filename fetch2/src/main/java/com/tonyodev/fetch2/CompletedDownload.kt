@@ -110,7 +110,7 @@ open class CompletedDownload : Parcelable, Serializable {
             }
             val identifier = source.readLong()
             val created = source.readLong()
-            val extras = source.readSerializable() as Map<String, String>
+            val extras = source.readSerializable() as MutableMap<String, String>
 
             val completedDownload = CompletedDownload()
             completedDownload.url = url

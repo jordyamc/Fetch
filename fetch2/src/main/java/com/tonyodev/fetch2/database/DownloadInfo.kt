@@ -261,7 +261,7 @@ open class DownloadInfo : Download {
             val downloadOnEnqueue = source.readInt() == 1
             val etaInMilliSeconds = source.readLong()
             val downloadedBytesPerSecond = source.readLong()
-            val extras = source.readSerializable() as HashMap<String, String>
+            val extras = source.readSerializable() as MutableMap<String, String>
             val autoRetryMaxAttempts = source.readInt()
             val autoRetryAttempts = source.readInt()
 

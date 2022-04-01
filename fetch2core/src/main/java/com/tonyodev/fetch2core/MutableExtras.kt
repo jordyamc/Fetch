@@ -76,7 +76,7 @@ open class MutableExtras(protected val mutableData: MutableMap<String, String> =
      * @return Returns an immutable copy of this instance.
      * */
     fun toExtras(): Extras {
-        return Extras(mutableData.toMap())
+        return Extras(mutableData)
     }
 
     override fun toString(): String {

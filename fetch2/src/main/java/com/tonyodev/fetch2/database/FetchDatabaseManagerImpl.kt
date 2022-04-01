@@ -133,6 +133,7 @@ class FetchDatabaseManagerImpl constructor(
         return download
     }
 
+
     override fun deleteExtraByKey(id: Int, key: String): DownloadInfo? {
         throwExceptionIfClosed()
         val download = requestDatabase.requestDao().get(id)
@@ -141,6 +142,14 @@ class FetchDatabaseManagerImpl constructor(
         if (download != null) updateExtras(id, download.extras)
         sanitize(download)
         return download
+    }
+
+    override fun deleteExtraByKey(ids: List<Int>, key: String): List<DownloadInfo?> {
+        throwExceptionIfClosed()
+        val downloads = requestDatabase.requestDao().get(ids).map {
+            deleteExtraByKey(it.download.id, key)
+        }
+        return downloads
     }
 
     override fun updatePriority(ids: List<Int>, priority: Priority): List<Download> {

@@ -530,6 +530,17 @@ class FetchHandlerImpl(
         }
     }
 
+    override fun deleteExtraByKey(ids: List<Int>, key: String): List<Download> {
+        var downloads = fetchDatabaseManagerWrapper.get(ids).filterNotNull()
+        if (downloads.isNotEmpty()) {
+            cancelDownloadsIfDownloading(downloads)
+            downloads = fetchDatabaseManagerWrapper.get(ids).filterNotNull()
+        }
+        return if (downloads.isNotEmpty()) {
+            fetchDatabaseManagerWrapper.deleteExtraByKey(ids, key).filterNotNull()
+        } else throw FetchException(REQUEST_DOES_NOT_EXIST)
+    }
+
     override fun getDownloads(): List<Download> {
         return fetchDatabaseManagerWrapper.get()
     }

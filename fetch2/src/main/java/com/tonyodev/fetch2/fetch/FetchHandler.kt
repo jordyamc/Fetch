@@ -64,6 +64,7 @@ interface FetchHandler : Closeable {
     fun setDownloadConcurrentLimit(downloadConcurrentLimit: Int)
     fun replaceExtras(id: Int, extras: Extras): Download
     fun deleteExtraByKey(downloadId:Int, key: String): Download
+    fun deleteExtraByKey(ids: List<Int>, key: String): List<Download>
     fun hasActiveDownloads(includeAddedDownloads: Boolean): Boolean
     fun getListenerSet(): Set<FetchListener>
     fun getPendingCount(): Long

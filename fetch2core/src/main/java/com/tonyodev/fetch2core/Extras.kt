@@ -17,7 +17,7 @@ import java.io.Serializable
  * */
 open class Extras(
     /** Map that holds the custom data.*/
-    protected val data: HashMap<String, String>
+    protected val data: MutableMap<String, String>
 ) : Parcelable, Serializable {
 
     /**

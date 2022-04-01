@@ -99,7 +99,7 @@ open class Request constructor(
             }
             val enqueueAction = EnqueueAction.valueOf(input.readInt())
             val downloadOnEnqueue = input.readInt() == 1
-            val extras = input.readSerializable() as Map<String, String>
+            val extras = input.readSerializable() as MutableMap<String, String>
             val autoRetryMaxAttempts = input.readInt()
             val request = Request(url, file)
             request.identifier = identifier
