@@ -55,7 +55,7 @@ abstract class DownloadDatabase : RoomDatabase() {
         @JvmStatic
         fun getMigrations(): Array<Migration> {
             return arrayOf(MigrationOneToTwo(), MigrationTwoToThree(), MigrationThreeToFour(),
-                    MigrationFourToFive(), MigrationFiveToSix(), MigrationSixToSeven())
+                    MigrationFourToFive(), MigrationFiveToSix(), MigrationSixToSeven(), MigrationSevenToEight())
         }
 
     }
