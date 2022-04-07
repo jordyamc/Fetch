@@ -27,6 +27,7 @@ class MigrationSevenToEight : Migration(7, 8) {
                 )
             """.trimIndent()
         )
+        database.execSQL("CREATE INDEX index_tags_ref__id ON '${DownloadDatabase.TABLE_TAG_REF_NAME}'('${DownloadDatabase.COLUMN_ID}')")
     }
 
 }
