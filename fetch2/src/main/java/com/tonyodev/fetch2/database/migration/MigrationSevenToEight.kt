@@ -22,8 +22,8 @@ class MigrationSevenToEight : Migration(7, 8) {
                     '${DownloadDatabase.COLUMN_TAG_ID}' INTEGER NOT NULL, 
                     '${DownloadDatabase.COLUMN_ID}' INTEGER NOT NULL, 
                     PRIMARY KEY('${DownloadDatabase.COLUMN_TAG_ID}', '${DownloadDatabase.COLUMN_ID}'), 
-                    FOREIGN KEY('${DownloadDatabase.COLUMN_TAG_ID}') REFERENCES Tag('${DownloadDatabase.COLUMN_TAG_ID}') ON DELETE CASCADE, 
-                    FOREIGN KEY('${DownloadDatabase.COLUMN_ID}') REFERENCES DownloadInfo('${DownloadDatabase.COLUMN_ID}') ON DELETE CASCADE
+                    FOREIGN KEY('${DownloadDatabase.COLUMN_TAG_ID}') REFERENCES '${DownloadDatabase.TABLE_TAG_NAME}'('${DownloadDatabase.COLUMN_TAG_ID}') ON DELETE CASCADE, 
+                    FOREIGN KEY('${DownloadDatabase.COLUMN_ID}') REFERENCES '${DownloadDatabase.TABLE_NAME}'('${DownloadDatabase.COLUMN_ID}') ON DELETE CASCADE
                 )
             """.trimIndent()
         )
