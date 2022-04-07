@@ -10,7 +10,7 @@ class MigrationSevenToEight : Migration(7, 8) {
         database.execSQL(
             """
                 CREATE TABLE '${DownloadDatabase.TABLE_TAG_NAME}' (
-                    '${DownloadDatabase.COLUMN_TAG_ID}' INTEGER, 
+                    '${DownloadDatabase.COLUMN_TAG_ID}' INTEGER NOT NULL, 
                     '${DownloadDatabase.COLUMN_TITLE}' TEXT NOT NULL, 
                     PRIMARY KEY('${DownloadDatabase.COLUMN_TAG_ID}')
                 )
