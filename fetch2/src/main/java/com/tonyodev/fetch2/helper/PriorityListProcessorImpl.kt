@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
+import androidx.core.content.ContextCompat
 import com.tonyodev.fetch2.*
 import com.tonyodev.fetch2.downloader.DownloadManager
 import com.tonyodev.fetch2core.HandlerWrapper
@@ -68,7 +70,18 @@ class PriorityListProcessorImpl constructor(private val handlerWrapper: HandlerW
 
     init {
         networkInfoProvider.registerNetworkChangeListener(networkChangeListener)
-        context.registerReceiver(priorityBackoffResetReceiver, IntentFilter(ACTION_QUEUE_BACKOFF_RESET))
+        if (Build.VERSION.SDK_INT >= 33) {
+            context.registerReceiver(
+                priorityBackoffResetReceiver,
+                IntentFilter(ACTION_QUEUE_BACKOFF_RESET),
+                Context.RECEIVER_NOT_EXPORTED
+            )
+        } else {
+            context.registerReceiver(
+                priorityBackoffResetReceiver,
+                IntentFilter(ACTION_QUEUE_BACKOFF_RESET)
+            )
+        }
     }
 
     private val priorityIteratorRunnable = Runnable {

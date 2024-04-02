@@ -80,7 +80,7 @@ project.afterEvaluate {
                 setGroupId "com.tonyodev.fetch2core"
                 //setArtifactId artifactId
                 setArtifactId "fetch2core"
-                version "3.1.6"
+                version "3.1.7"
 
                 artifact bundleDebugAar
             }

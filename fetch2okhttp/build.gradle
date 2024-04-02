@@ -92,7 +92,7 @@ project.afterEvaluate {
                 setGroupId "com.tonyodev.fetch2okhttp"
                 //setArtifactId artifactId
                 setArtifactId "fetch2okhttp"
-                version "3.1.6"
+                version "3.1.7"
 
                 artifact bundleDebugAar
             }

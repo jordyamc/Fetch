@@ -84,7 +84,7 @@ project.afterEvaluate {
                 setGroupId "com.tonyodev.fetch2rx"
                 //setArtifactId artifactId
                 setArtifactId "fetch2rx"
-                version "3.1.6"
+                version "3.1.7"
 
                 artifact bundleDebugAar
             }

@@ -53,7 +53,11 @@ abstract class DefaultFetchNotificationManager(context: Context) : FetchNotifica
     }
 
     override fun registerBroadcastReceiver() {
-        context.registerReceiver(broadcastReceiver, IntentFilter(notificationManagerAction))
+        if (Build.VERSION.SDK_INT >= 33) {
+            context.registerReceiver(broadcastReceiver, IntentFilter(notificationManagerAction), Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            context.registerReceiver(broadcastReceiver, IntentFilter(notificationManagerAction))
+        }
     }
 
     override fun unregisterBroadcastReceiver() {
